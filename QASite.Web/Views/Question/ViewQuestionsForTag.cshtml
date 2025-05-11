@@ -1,0 +1,55 @@
+﻿@model ViewQuestionsForTagViewModel;
+@using QASite.Data;
+
+@if (Model.Questions.Count==0)
+{
+    <h1> there are no questions that match this tag</h1>
+}
+
+@foreach (Question q in Model.Questions)
+{
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2" style="margin-top:100px">
+            <div class="card card-body bg-light">
+                <h4>
+                    <a href="/question/viewQuestion?id=@q.Id">
+                        @q.Title
+                    </a>
+                </h4>
+                <div>
+                    <span>Tags:</span>
+                    @foreach (QuestionsTags qt in q.QuestionsTags)
+                    {
+                        <a href="/question/viewquestionsfortag?name=@Uri.EscapeDataString(qt.Tag.Name)">
+
+                            <span class="badge bg-primary">@qt.Tag.Name</span>
+                        </a>
+                    }
+                </div>
+                <div style="margin-top: 10px;">
+                    @q.Text
+                </div>
+
+                <br />
+                @if (q.Answers.Count == 0)
+                {
+                    <span> 0 answers</span>
+                }
+                else if (q.Answers.Count == 1)
+                {
+                    <span> 1 answer </span>
+                }
+                else
+                {
+                    <span> @q.Answers.Count answers </span>
+                }
+            </div>
+
+        </div>
+    </div>
+}
+
+
+
+
