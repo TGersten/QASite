@@ -16,7 +16,8 @@
                 <div>
                     <span>Tags:</span>
                    @foreach (QuestionsTags qt in q.QuestionsTags)
-                   {  <a href = "/question/viewquestionsfortag?name=@qt.Tag.Name">
+                    {
+                          <a href="/question/viewquestionsfortag?name=@Uri.EscapeDataString(qt.Tag.Name)">
 
                    <span class="badge bg-primary">@qt.Tag.Name</span>
                         </a>
